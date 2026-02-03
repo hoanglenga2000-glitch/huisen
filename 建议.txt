@@ -1,0 +1,54 @@
+﻿Role: 高级电商交互设计师 (Conversion Expert)
+Status: Stage 4 Completed.
+Task: Stage 5 - 重构 core/detail_v5.php (商品详情页)。
+
+Context:
+列表页已升级为京东风格。现在需要重构详情页。
+目标：打造一个 **高转化率的 B2B 详情页**，视觉风格对标 Tmall/JD。
+核心逻辑：突出“批发价优势”和“SKU选择体验”。
+
+Design Specifications (JD Pro Style):
+
+1.  **Page Layout**:
+    * 引用 `../includes/header.php`。
+    * Container: `max-w-screen-xl mx-auto py-8 bg-gray-50` (整个页面底色微灰，卡片白色)。
+    * **Breadcrumb**: 顶部添加面包屑 "首页 > 手机数码 > iPhone 16 Pro"。
+
+2.  **Hero Section (首屏核心区)**:
+    * **Container**: 白色卡片 `bg-white rounded-xl shadow-sm p-6 grid grid-cols-12 gap-8`.
+    * **Left (Gallery - col-span-5)**:
+        * Main Image: `aspect-square w-full rounded-lg border border-gray-100 object-contain`.
+        * Thumbnails: 主图下方一排小图 (`flex gap-2 mt-4`)，当前选中项带红框。
+    * **Right (Info - col-span-7)**:
+        * **Header**:
+            * Title: `text-2xl font-bold text-gray-900 leading-tight`.
+            * Sub-title: 红色小字 "限时直降500元，满10台包邮" (`text-red-500 mt-2`).
+        * **Price Box (核心)**:
+            * 背景: 浅红渐变或纯色块 (`bg-red-50/50 rounded-lg p-4 mt-4`).
+            * Layout: Flex alignment.
+            * Wholesale Price: `text-3xl font-bold text-primary` (¥8,999).
+            * Retail Price: `text-gray-400 line-through ml-4` (官网价 ¥9,999).
+            * Profit Badge: 绿色胶囊 "预估利润 ¥1000+" (`bg-green-100 text-green-700 text-xs px-2 py-1 rounded`).
+        * **Specs (SKU)**:
+            * Label: "颜色 / 内存".
+            * Buttons: 使用 **Pill Buttons**。选中状态为 `border-red-500 text-red-600 bg-red-50`，未选中为灰边框。禁止使用下拉菜单。
+        * **Actions (底栏)**:
+            * Stepper: 数量加减框.
+            * Buttons: 两个大按钮并排。
+                * "加入进货单": 黄色/浅红背景 (`bg-orange-100 text-orange-600 border border-orange-200`).
+                * "立即下单": 纯红背景 (`bg-primary text-white shadow-lg shadow-red-200`).
+
+3.  **Content Section (底部详情)**:
+    * Layout: `mt-8 grid grid-cols-12 gap-6`.
+    * Left (Sidebar - col-span-3): "热销推荐" 垂直列表。
+    * Right (Main - col-span-9):
+        * **Tabs**: 顶部吸顶 Tab栏 ("商品介绍" | "规格参数" | "售后保障")。
+        * Body: 白色长卡片，展示富文本详情。
+
+Code Requirements:
+1.  **PHP Logic**: 严格保留文件顶部的 SQL 查询逻辑（获取商品、图片、SKU）。
+2.  **Interaction**:
+    * 确保 SKU 按钮虽然是静态 HTML，但结构正确，方便后续 JS 绑定。
+    * 数据绑定: `<?php echo $product['name']; ?>` 等。
+
+请生成重构后的完整 HTML 代码。
